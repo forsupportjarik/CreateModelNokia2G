@@ -1,5 +1,6 @@
 import model.rxlevel.GetRxDataFile;
 import model.rxlevel.cf.GetCfDataFile;
+import model.rxlevel.dac.GetDacDataFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,6 +16,10 @@ public class Main {
         String fileCfToDb = "cf.csv";
         String cfFile = "cf.txt";
 
+        String pathToDac = "C:\\DATA\\PROGRAMMING\\filesToHide\\";
+        String fileDacToDb = "dac.csv";
+        String dacFile = "dac.txt";
+
         Utilities.runInitDb(Utilities.returnConnection());
 
         Utilities.loadToDbData(Utilities.returnConnection());
@@ -24,6 +29,9 @@ public class Main {
 
         GetCfDataFile.loadDataToCfLevel(Utilities.returnConnection(), pathToCf + fileCfToDb);
         GetCfDataFile.createCfLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToCf + cfFile));
+
+        GetDacDataFile.loadDataToDacLevel(Utilities.returnConnection(), pathToDac + fileDacToDb);
+        GetDacDataFile.createDacLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToDac + dacFile));
 
     }
 }
