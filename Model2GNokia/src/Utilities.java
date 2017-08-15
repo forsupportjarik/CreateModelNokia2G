@@ -1,14 +1,29 @@
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Utilities {
+
+    public static File createFile(String path) {
+        File file = null;
+        try {
+            file = new File(path);
+            boolean fvar = file.createNewFile();
+            if (fvar) {
+                System.out.println("File has been created successfully");
+            } else {
+                System.out.println("File already present at the specified location");
+            }
+        } catch (IOException e) {
+            System.out.println("Exception Occurred:");
+            e.printStackTrace();
+        }
+        return file;
+    }
 
     public static Connection returnConnection() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
