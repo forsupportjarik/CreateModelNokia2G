@@ -1,3 +1,5 @@
+import model.rxlevel.GetRxDataFile;
+
 import java.sql.SQLException;
 
 public class Main {
@@ -8,6 +10,7 @@ public class Main {
 
         Utilities.loadToDbData(Utilities.returnConnection());
 
+        GetRxDataFile.loadDataToRxLevel(Utilities.returnConnection());
 
     }
 }
