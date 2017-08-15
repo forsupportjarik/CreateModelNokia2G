@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class GetCfDataFile {
 
-    public static void loadDataToRxLevel(Connection connection, String path) throws SQLException {
+    public static void loadDataToCfLevel(Connection connection, String path) throws SQLException {
 
         Statement statement = connection.createStatement();
 
@@ -19,15 +19,14 @@ public class GetCfDataFile {
         System.out.println("Data from " + path + " to cf table is imported");
     }
 
-    public static void createRxLevelFileData(Connection connection, File file) throws SQLException, IOException {
+    public static void createCfLevelFileData(Connection connection, File file) throws SQLException, IOException {
 
         Statement statement = connection.createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT rxlevel.bsc_name, rxlevel.bts_name, rxlevel.period_start_time, rxlevel.period_start_time, rxlevel.period_duration,\n" +
-                "    ids.bts, ids.trx, rxlevel.bsc_name, ids.bts_id, ids.trx_id, rxlevel.rng_id, rxlevel.freq_ul_qual0, rxlevel.freq_ul_qual1, rxlevel.freq_ul_qual2,\n" +
-                "    rxlevel.freq_ul_qual3, rxlevel.freq_ul_qual4, rxlevel.freq_ul_qual5, rxlevel.freq_ul_qual6, rxlevel.freq_ul_qual7,\n" +
-                "    rxlevel.freq_dl_qual0, rxlevel.freq_dl_qual1, rxlevel.freq_dl_qual2, rxlevel.freq_dl_qual3, rxlevel.freq_dl_qual4, rxlevel.freq_dl_qual5, rxlevel.freq_dl_qual6,\n" +
-                "    rxlevel.freq_dl_qual7 FROM rxlevel LEFT JOIN ids ON CONCAT(rxlevel.bts_name, rxlevel.trx_id) = CONCAT(ids.bts_name, ids.trx);");
+        ResultSet rs = statement.executeQuery("SELECT cf.period_start_time, cf.period_start_time, cf.period_duration, ids.bts_id, cf.bsc_name, cf.bts_name,\n" +
+                "    ids.bts, cf.ncc_id, cf.bcc_id, cf.bcch_id, cf.db_value_low, cf.db_value_high, cf.ave_dl_signal_strength,\n" +
+                "    cf.standart_deviation, cf.num_of_samples_in_class_1, cf.num_of_samples_in_class_2, cf.num_of_samples_in_class_3\n" +
+                "  FROM cf LEFT JOIN ids ON cf.bts_name = ids.bts_name;");
 
         FileWriter fw = new FileWriter(file);
 

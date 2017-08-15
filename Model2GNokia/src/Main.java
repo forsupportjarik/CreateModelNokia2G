@@ -1,4 +1,5 @@
 import model.rxlevel.GetRxDataFile;
+import model.rxlevel.cf.GetCfDataFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ public class Main {
         String rxFile = "rxlevel.txt";
 
         String pathToCf = "C:\\DATA\\PROGRAMMING\\filesToHide\\";
+        String fileCfToDb = "cf.csv";
         String cfFile = "cf.txt";
 
         Utilities.runInitDb(Utilities.returnConnection());
@@ -19,6 +21,9 @@ public class Main {
 
         GetRxDataFile.loadDataToRxLevel(Utilities.returnConnection());
         GetRxDataFile.createRxLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToRx + rxFile));
+
+        GetCfDataFile.loadDataToCfLevel(Utilities.returnConnection(), pathToCf + fileCfToDb);
+        GetCfDataFile.createCfLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToCf + cfFile));
 
     }
 }
