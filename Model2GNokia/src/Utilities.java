@@ -49,15 +49,40 @@ public class Utilities {
     }
 
 
-    public static void loadToDbData(Connection connection) throws SQLException {
+    public static void loadToDbDataForTrx(Connection connection, String path) throws SQLException, ClassNotFoundException {
 
         Statement statement = connection.createStatement();
 
-        String path = "'C:\\DATA\\PROGRAMMING\\filesToHide\\BTS_ID&TRX_ID.csv'";
+        statement.executeUpdate("COPY idstrx FROM " + path + " (DELIMITER ',')");
 
-        statement.executeUpdate("COPY ids FROM" + path + "(DELIMITER ',')");
+        connection.close();
 
         System.out.println("Data from " + path + " to database is imported");
 
     }
+
+    public static void loadToDbDataForBTS(Connection connection, String path) throws SQLException, ClassNotFoundException {
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate("COPY idsbts FROM " + path + " (DELIMITER ',')");
+
+        connection.close();
+
+        System.out.println("Data from " + path + " to database is imported");
+    }
+
+    public void start() {
+
+        long start = System.nanoTime();
+        long end = 0;
+
+    }
+
+    public void stop() {
+
+        long stop = System.nanoTime();
+
+    }
+
+
 }

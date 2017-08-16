@@ -14,7 +14,7 @@ public class GetRxDataFile {
 
         Statement statement = connection.createStatement();
 
-        statement.executeUpdate("COPY RXLEVEL FROM" + path + "DELIMITER ';' CSV HEADER");
+        statement.executeUpdate("COPY RXLEVEL FROM " + path + "DELIMITER ';' CSV HEADER");
 
         System.out.println("Data from " + path + " to rxlevel table is imported");
     }
@@ -26,10 +26,10 @@ public class GetRxDataFile {
         String path = "'C:\\DATA\\PROGRAMMING\\filesToHide\\rxlevel.txt'";
 
         ResultSet rs = statement.executeQuery("SELECT rxlevel.bsc_name, rxlevel.bts_name, rxlevel.period_start_time, rxlevel.period_start_time, rxlevel.period_duration,\n" +
-                "    ids.bts, ids.trx, rxlevel.bsc_name, ids.bts_id, ids.trx_id, rxlevel.rng_id, rxlevel.freq_ul_qual0, rxlevel.freq_ul_qual1, rxlevel.freq_ul_qual2,\n" +
+                "    idstrx.bts, idstrx.trx, rxlevel.bsc_name, idstrx.bts_id, idstrx.trx_id, rxlevel.rng_id, rxlevel.freq_ul_qual0, rxlevel.freq_ul_qual1, rxlevel.freq_ul_qual2,\n" +
                 "    rxlevel.freq_ul_qual3, rxlevel.freq_ul_qual4, rxlevel.freq_ul_qual5, rxlevel.freq_ul_qual6, rxlevel.freq_ul_qual7,\n" +
                 "    rxlevel.freq_dl_qual0, rxlevel.freq_dl_qual1, rxlevel.freq_dl_qual2, rxlevel.freq_dl_qual3, rxlevel.freq_dl_qual4, rxlevel.freq_dl_qual5, rxlevel.freq_dl_qual6,\n" +
-                "    rxlevel.freq_dl_qual7 FROM rxlevel LEFT JOIN ids ON CONCAT(rxlevel.bts_name, rxlevel.trx_id) = CONCAT(ids.bts_name, ids.trx);");
+                "    rxlevel.freq_dl_qual7 FROM rxlevel LEFT JOIN idstrx ON CONCAT(rxlevel.bts_name, rxlevel.trx_id) = CONCAT(idstrx.bts_name, idstrx.trx);");
 
         FileWriter fw = new FileWriter(file);
 
@@ -61,7 +61,8 @@ public class GetRxDataFile {
             fw.append(rs.getString(23) + "\t");
             fw.append(rs.getString(24) + "\t");
             fw.append(rs.getString(25) + "\t");
-            fw.append(rs.getString(26) + "\n");
+            fw.append(rs.getString(26) + "\t");
+            fw.append(rs.getString(27) + "\n");
         }
         fw.flush();
         fw.close();

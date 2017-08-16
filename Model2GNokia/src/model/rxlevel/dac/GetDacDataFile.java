@@ -22,11 +22,11 @@ public class GetDacDataFile {
 
         Statement statement = connection.createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT dac.period_start_time, dac.period_start_time, dac.period_duration, ids.bts_id, dac.bsc_name, dac.bts_name,\n" +
-                "    ids.bts, dac.ncc_id, dac.bcc_id, dac.bcch_id, dac.db_value_low, dac.db_value_high, dac.ave_dl_sig_str_serv_cell_sum,\n" +
+        ResultSet rs = statement.executeQuery("SELECT dac.period_start_time, dac.period_start_time, dac.period_duration, idsbts.bts_id, dac.bsc_name, dac.bts_name,\n" +
+                "    idsbts.bts, dac.ncc_id, dac.bcc_id, dac.bcch_id, dac.db_value_low, dac.db_value_high, dac.ave_dl_sig_str_serv_cell_sum,\n" +
                 "    dac.ave_dl_sig_str_serv_cell_den, dac.std_dev_of_serv_cell, dac.ave_dl_sig_str_adj_cell, dac.std_dev_of_adj_cell,\n" +
-                "    dac.nbr_of_samples_in_class1, dac.nbr_of_samples_in_class2, dac.nbr_of_samples_in_class3 FROM dac LEFT JOIN ids\n" +
-                "    ON dac.bts_name = ids.bts_name;");
+                "    dac.nbr_of_samples_in_class1, dac.nbr_of_samples_in_class2, dac.nbr_of_samples_in_class3 FROM dac LEFT JOIN idsbts\n" +
+                "    ON dac.bts_name = idsbts.bts_name;");
 
         FileWriter fw = new FileWriter(file);
 

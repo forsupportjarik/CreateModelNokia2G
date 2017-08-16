@@ -23,10 +23,10 @@ public class GetCfDataFile {
 
         Statement statement = connection.createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT cf.period_start_time, cf.period_start_time, cf.period_duration, ids.bts_id, cf.bsc_name, cf.bts_name,\n" +
-                "    ids.bts, cf.ncc_id, cf.bcc_id, cf.bcch_id, cf.db_value_low, cf.db_value_high, cf.ave_dl_signal_strength,\n" +
+        ResultSet rs = statement.executeQuery("SELECT cf.period_start_time, cf.period_start_time, cf.period_duration, idsbts.bts_id, cf.bsc_name, cf.bts_name,\n" +
+                "    idsbts.bts, cf.ncc_id, cf.bcc_id, cf.bcch_id, cf.db_value_low, cf.db_value_high, cf.ave_dl_signal_strength,\n" +
                 "    cf.standart_deviation, cf.num_of_samples_in_class_1, cf.num_of_samples_in_class_2, cf.num_of_samples_in_class_3\n" +
-                "  FROM cf LEFT JOIN ids ON cf.bts_name = ids.bts_name;");
+                "  FROM cf LEFT JOIN idsbts ON cf.bts_name = idsbts.bts_name;");
 
         FileWriter fw = new FileWriter(file);
 
