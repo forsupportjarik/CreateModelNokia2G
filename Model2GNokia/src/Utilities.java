@@ -71,16 +71,20 @@ public class Utilities {
         System.out.println("Data from " + path + " to database is imported");
     }
 
-    public void start() {
+    public static long start() {
 
         long start = System.nanoTime();
         long end = 0;
 
+        return start;
+
     }
 
-    public void stop() {
+    public static long stop() {
 
         long stop = System.nanoTime();
+
+        return stop;
 
     }
 

@@ -27,19 +27,37 @@ public class Main {
         String dacFile = "dac.txt";
 
 
-
-
+        long startTimeInitDb = Utilities.start();
         Utilities.runInitDb(Utilities.returnConnection());
+        long stopTimeInitDb = Utilities.stop();
+        System.out.println(stopTimeInitDb - startTimeInitDb);
 
-        Utilities.loadToDbDataForBTS(Utilities.returnConnection(),"'" + pathToIdsDataBts + fileToLoadIdsBts + "'");
+        long startTimeToLoadDataToDb = Utilities.start();
+        Utilities.loadToDbDataForBTS(Utilities.returnConnection(), "'" + pathToIdsDataBts + fileToLoadIdsBts + "'");
         Utilities.loadToDbDataForTrx(Utilities.returnConnection(), "'" + pathToIdsDatatrx + fileToLoadIdstrx + "'");
         GetRxDataFile.loadDataToRxLevel(Utilities.returnConnection(), "'" + pathToRx + fileRxToDb + "'");
         GetCfDataFile.loadDataToCfLevel(Utilities.returnConnection(), "'" + pathToCf + fileCfToDb + "'");
         GetDacDataFile.loadDataToDacLevel(Utilities.returnConnection(), "'" + pathToDac + fileDacToDb + "'");
+        long stopTimeToLoadDataToDb = Utilities.stop();
+        System.out.println(stopTimeToLoadDataToDb - startTimeToLoadDataToDb);
 
+        long startTimeGetRxLevel = Utilities.start();
         GetRxDataFile.createRxLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToRx + rxFile));
-        GetCfDataFile.createCfLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToCf + cfFile));
-        GetDacDataFile.createDacLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToDac + dacFile));
+        long stopTimeGetRxLevel = Utilities.stop();
+        System.out.println(stopTimeGetRxLevel - startTimeGetRxLevel);
 
+        long startTimeGetCfLevel = Utilities.start();
+        GetCfDataFile.createCfLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToCf + cfFile));
+        long stopTimeGetCfLevel = Utilities.stop();
+        System.out.println(stopTimeGetCfLevel - startTimeGetCfLevel);
+
+        long startTimeGetDacLevel = Utilities.start();
+        GetDacDataFile.createDacLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToDac + dacFile));
+        long stopTimeGetDacLevel = Utilities.stop();
+        System.out.println(stopTimeGetDacLevel - startTimeGetDacLevel);
+
+        System.out.println("summary of all time events:" + ((stopTimeInitDb - startTimeInitDb) + (stopTimeToLoadDataToDb - startTimeToLoadDataToDb) +
+                (stopTimeGetRxLevel - startTimeGetRxLevel) + (stopTimeGetCfLevel - startTimeGetCfLevel) +
+                (stopTimeGetDacLevel - startTimeGetDacLevel)) / 1000000000);
     }
 }
