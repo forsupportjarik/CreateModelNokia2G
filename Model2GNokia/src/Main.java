@@ -30,7 +30,7 @@ public class Main {
         long startTimeInitDb = Utilities.start();
         Utilities.runInitDb(Utilities.returnConnection());
         long stopTimeInitDb = Utilities.stop();
-        System.out.println(stopTimeInitDb - startTimeInitDb);
+        System.out.println((stopTimeInitDb - startTimeInitDb) / 1000000000 + " s");
 
         long startTimeToLoadDataToDb = Utilities.start();
         Utilities.loadToDbDataForBTS(Utilities.returnConnection(), "'" + pathToIdsDataBts + fileToLoadIdsBts + "'");
@@ -39,25 +39,25 @@ public class Main {
         GetCfDataFile.loadDataToCfLevel(Utilities.returnConnection(), "'" + pathToCf + fileCfToDb + "'");
         GetDacDataFile.loadDataToDacLevel(Utilities.returnConnection(), "'" + pathToDac + fileDacToDb + "'");
         long stopTimeToLoadDataToDb = Utilities.stop();
-        System.out.println(stopTimeToLoadDataToDb - startTimeToLoadDataToDb);
+        System.out.println((stopTimeToLoadDataToDb - startTimeToLoadDataToDb) / 1000000000 + " s");
 
         long startTimeGetRxLevel = Utilities.start();
         GetRxDataFile.createRxLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToRx + rxFile));
         long stopTimeGetRxLevel = Utilities.stop();
-        System.out.println(stopTimeGetRxLevel - startTimeGetRxLevel);
+        System.out.println((stopTimeGetRxLevel - startTimeGetRxLevel) / 1000000000 + " s");
 
         long startTimeGetCfLevel = Utilities.start();
         GetCfDataFile.createCfLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToCf + cfFile));
         long stopTimeGetCfLevel = Utilities.stop();
-        System.out.println(stopTimeGetCfLevel - startTimeGetCfLevel);
+        System.out.println((stopTimeGetCfLevel - startTimeGetCfLevel) / 1000000000 + " s");
 
         long startTimeGetDacLevel = Utilities.start();
         GetDacDataFile.createDacLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToDac + dacFile));
         long stopTimeGetDacLevel = Utilities.stop();
-        System.out.println(stopTimeGetDacLevel - startTimeGetDacLevel);
+        System.out.println((stopTimeGetDacLevel - startTimeGetDacLevel) / 1000000000 + " s");
 
         System.out.println("summary of all time events:" + ((stopTimeInitDb - startTimeInitDb) + (stopTimeToLoadDataToDb - startTimeToLoadDataToDb) +
                 (stopTimeGetRxLevel - startTimeGetRxLevel) + (stopTimeGetCfLevel - startTimeGetCfLevel) +
-                (stopTimeGetDacLevel - startTimeGetDacLevel)) / 1000000000);
+                (stopTimeGetDacLevel - startTimeGetDacLevel)) / 1000000000 + " s");
     }
 }
