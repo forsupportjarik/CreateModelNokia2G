@@ -10,11 +10,9 @@ import java.sql.Statement;
 
 public class GetRxDataFile {
 
-    public static void loadDataToRxLevel(Connection connection) throws SQLException {
+    public static void loadDataToRxLevel(Connection connection, String path) throws SQLException {
 
         Statement statement = connection.createStatement();
-
-        String path = "'C:\\DATA\\PROGRAMMING\\filesToHide\\rxlevel.csv'";
 
         statement.executeUpdate("COPY RXLEVEL FROM" + path + "DELIMITER ';' CSV HEADER");
 

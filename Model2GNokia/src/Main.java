@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
 
         String pathToRx = "C:\\DATA\\PROGRAMMING\\filesToHide\\";
+        String fileRxToDb = "rxlevel.csv";
         String rxFile = "rxlevel.txt";
 
         String pathToCf = "C:\\DATA\\PROGRAMMING\\filesToHide\\";
@@ -24,7 +25,7 @@ public class Main {
 
         Utilities.loadToDbData(Utilities.returnConnection());
 
-        GetRxDataFile.loadDataToRxLevel(Utilities.returnConnection());
+        GetRxDataFile.loadDataToRxLevel(Utilities.returnConnection(), pathToRx + fileRxToDb);
         GetRxDataFile.createRxLevelFileData(Utilities.returnConnection(), Utilities.createFile(pathToRx + rxFile));
 
         GetCfDataFile.loadDataToCfLevel(Utilities.returnConnection(), pathToCf + fileCfToDb);
