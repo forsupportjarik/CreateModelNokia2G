@@ -51,6 +51,7 @@ CREATE TABLE RXLEVEL(
   freq_dl_qual7 VARCHAR(255)
 );
 
+
 CREATE TABLE CF(
   period_start_time VARCHAR(255),
   bsc_name VARCHAR(255),
@@ -89,4 +90,7 @@ CREATE TABLE DAC(
   nbr_of_samples_in_class2 VARCHAR(255),
   nbr_of_samples_in_class3 VARCHAR(255)
 );
+
+
+
 

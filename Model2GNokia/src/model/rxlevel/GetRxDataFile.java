@@ -38,8 +38,8 @@ public class GetRxDataFile {
         while (rs.next()) {
             fw.append(rs.getString(1) + "\t");
             fw.append(rs.getString(2) + "\t");
-            fw.append(rs.getString(3) + "\t");//TODO needs to fit data type under forte type
-            fw.append(rs.getString(4) + "\t");//TODO needs to fit data type under forte type
+            fw.append(rs.getString(3) + "\t");//TODO needs to fit data type under Forte
+            fw.append(rs.getString(4) + "\t");//TODO needs to fit data type under Forte
             fw.append(rs.getString(5) + "\t");
             fw.append(rs.getString(6) + "\t");
             fw.append(rs.getString(7) + "\t");
